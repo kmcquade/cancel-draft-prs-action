@@ -17,7 +17,7 @@ This action is a workaround for that limitation. It cancels draft PRs. It's usef
 name: Cancel Draft PRs
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
   cancel-drafts:
