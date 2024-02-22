@@ -1,0 +1,29 @@
+name: 'Check PR Draft Status and Cancel'
+description: 'Checks if a PR is a draft and cancels the workflow if so.'
+branding:
+  icon: fast-forward
+  color: gray-dark
+inputs:
+  github-token:
+    description: 'GitHub token for authentication'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Check if PR is a draft
+      id: check-draft
+      uses: actions/github-script@v6
+      with:
+        github-token: ${{ inputs.github-token }}
+        script: |
+          const { data: pullRequest } = await github.rest.pulls.get({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: context.issue.number,
+          });
+          return pullRequest.draft;
+        result-encoding: string
+    - name: Cancel if draft
+      if: ${{ steps.check-draft.outputs.result == 'true' }}
+      run: echo "This workflow is cancelled because the PR is a draft." && exit 1
+      shell: bash
