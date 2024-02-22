@@ -1,4 +1,4 @@
-name: 'Check PR Draft Status and Cancel'
+name: 'Cancel Draft PRs'
 description: 'Checks if a PR is a draft and cancels the workflow if so.'
 branding:
   icon: fast-forward
