@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check PR Draft Status and Cancel Workflow
-        uses: kmcquade/cancel-draft-prs-action@latest
+        uses: kmcquade/cancel-draft-prs-action@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
